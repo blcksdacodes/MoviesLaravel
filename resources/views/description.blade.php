@@ -1,66 +1,60 @@
-<!DOCTYPE html>
-<html>
-    <title>BeeFlix >> Movies</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
-    <body>
-        <style>
-            body{
-                background-color: rgb(207, 207, 207);
-            }
-            .title{
-                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            }
-            .table{
-                
-                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                 margin left: 20%;
-                 {{-- text align: center; --}}
-                 background-color: rgb(61, 107, 16);
-            }
-            .judul{
-                text-align: center;
-            }
-            .episodes{
-                text-align: center;
-            }
-            .episode_div{
-                float: center;
-            }
-            .checked {
-                color: orange;
-            }
+@extends('layout')
 
-        </style>
-        <h1 class="title">{{$movie->title}}</h1>
-        <p>{{$movie->description}}</p>
-        <br>
-        {{-- @foreach ($episode as $ep)
-                {{$ep->title}}
-        @endforeach --}}
-        <div class="episode_div">
-        <h1 class="judul_episode">Episodes</h1>
-        <table class ="table">
-            <tr class = "judul">
-                <td>Episode</td>
-                <td>Judul</td>
-            </tr>
-            @foreach ($episode as $ep)
-                <tr class= "episodes">
+@section('head')
+
+@endsection
+
+@section('style')
+    <style>
+        body{
+            
+            }
+    </style>
+@endsection
+
+@section('content')
+    <div class="d-flex ">
+        <div class="card">
+            <img src="/test.jpg" class="" alt="..."style="width: 10rem;">
+        </div>
+
+        <div class="container mr-3 ml-3" style="width: 30rem;">
+            <h2>{{$movie->title}}</h2>
+            <div class="mt-3 mb-3">
+                @for ($i = 0; $i < $movie->rating; $i++)
+                    <span class="fa fa-star checked"></span>
+                @endfor
+            </div>
+            <p>{{$movie->description}}</p>
+            Kategori : {{$genre->name}}
+        </div>
+        <div class="container" style="width: 20rem;">
+            <h2>Episodes</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Episode</td>
+                        <td>Title</td>
+                    </tr>
+                </thead>
+                @foreach ($episode as $ep)
+                <tr>
                     <td>{{$ep->episodes}}</td>
                     <td>{{$ep->title}}</td>
                 </tr>
-            @endforeach
-        </table>
-        <div class="d-flex justify-content-center">
-            {!! $episode->links() !!}
+                @endforeach
+            </table>
+            <div class="">
+                {{ $episode->links() }}
+            </div>
+            
         </div>
-        @for ($i = 0; $i < $movie->rating; $i++)
-          <span class="fa fa-star checked"></span>
-        @endfor
-        
 
-</nav>
-        </div>
-    </body>
+            
+    </div>
+
+            
+            
+@endsection
+        
 </html>

@@ -9,8 +9,8 @@ use Illuminate\Support\Str;
 $factory->define(episodes::class, function (Faker $faker) {
     return [
         //
-        'title'=>Str::Random(10),
+        'title'=>$faker->sentence,
         'movies_id'=>Factory(App\movies::class)-> create()->id,
-        'episodes'=>Rand(1,10),
+        'episodes'=>Rand(1, 10),
     ];
 });

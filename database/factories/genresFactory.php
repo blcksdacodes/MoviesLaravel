@@ -9,6 +9,6 @@ use Illuminate\Support\Str;
 $factory->define(genres::class, function (Faker $faker) {
     return [
         //
-        'name' => Str::random(10),
+        'name' => $faker->word
     ];
 });
