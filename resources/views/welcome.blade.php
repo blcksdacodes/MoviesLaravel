@@ -1,45 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>BeeFlix</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <h1 class='Welcome'>HELLO</h1>
-    
-    <style>
-        .Welcome{
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: xx-large;
-        }
-        .movies{
-            {{-- text-align: center;
-            margin-top: 10%; --}}
-            
-        }
-        .movielist{
-             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-             {{-- padding: 10%;
-             margin: 10%; --}}
-        }
-    </style>
-</head>
-<body>
-    
-        @foreach($movies as $movie)
-            <a href="/movies/{{$movie->id}}" class="text-dark">{{$movie->title}}</a>
-            <br>
-        @endforeach
+@extends('layout')
+
+@section('head')
+    <div class="ml-3 mt-3">
+        <h1 class="">Hello</h1>
+    </div>    
+@endsection
+
+@section('content')
+        <div class="">
+            <h3>List of movies:</h3>
+            <div class="d-flex">
+                @foreach($movies as $movie)
+                <div class="card mr-3" style="width: 18rem;">
+                    <img src="test.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{$movie->title}}</h5>
+                        <a href="/movies/{{$movie->id}}" class="btn btn-primary ">Go to Details</a>
+                    </div>
+                </div>
+                    <br>
+                @endforeach
+            </div>
+        </div>
+        
         <hr>
         <br>
-        @foreach ($genre as $gen)
+        <div>
+            <h3>Movies By Categories</h3>
+            @foreach ($genre as $gen)
+                <h5>{{$gen->name}}</h5>
+                <div class="d-flex">
+                @forelse ($gen->movies as $genmovies)
+                    <div class="card mr-3" style="width: 10rem;">
+                        <img src="test.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$genmovies->title}}</h5>
+                            <a href="/movies/{{$genmovies->id}}" class="btn btn-primary ">Go to Details</a>
+                        </div>
+                    </div>
 
-            {{$gen->name}}
-            <br>
-            <ol>
-                @foreach ($gen->movies as $genmovies)
-                    <li><a href="/movies/{{$movie->id}}" class="text-dark">{{$movie->title}}</a></li>
-                @endforeach
-            </ol>
-        @endforeach
+                @empty
+                    <p>No Movies in this category</p>
+                @endforelse
+                </div>
+            @endforeach
+        </div>
+
         
-</body>
-</html>
+</div>
+       
+
+@endsection
